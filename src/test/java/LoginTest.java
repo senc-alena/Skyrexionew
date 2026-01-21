@@ -10,7 +10,6 @@ public class LoginTest extends BaseTest {
     public void firstLogin() {
         browser.findElement(By.id("user-name")).sendKeys("standart_user");
         browser.findElement(By.id("user-name")).sendKeys(Keys.CONTROL + "A");
-
         browser.findElement(By.id("user-name")).sendKeys(Keys.BACK_SPACE);
         browser.findElement(By.id("user-name")).sendKeys("standard_user");
         browser.findElement(By.xpath("//*[@data-test='password']")).sendKeys("secret_sauce");
