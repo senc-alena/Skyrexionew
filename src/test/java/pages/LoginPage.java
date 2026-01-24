@@ -17,20 +17,17 @@ public class LoginPage extends BasePage {
         driver.get(BASE_URL);
     }
 
-    public void login(String user, String password){
+    public void login(String user, String password) {
         driver.findElement(loginInput).sendKeys(user);
         driver.findElement(passwordInput).sendKeys(password);
         driver.findElement(loginButton).click();
     }
 
-    public boolean isErrorDisplayed(){
+    public boolean isErrorDisplayed() {
         return driver.findElement(errorMsc).isDisplayed();
     }
 
-    public String getErrorText(){
+    public String getErrorText() {
         return driver.findElement(errorMsc).getText();
     }
-
 }
-
-

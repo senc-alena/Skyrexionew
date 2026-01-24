@@ -18,7 +18,6 @@ public class BaseTest {
 
     @BeforeMethod
     public void setup() {
-
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         options.addArguments("--guest");
@@ -28,7 +27,7 @@ public class BaseTest {
 
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
-       }
+    }
 
     @AfterMethod
     public void closeBrowser() {

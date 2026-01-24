@@ -10,7 +10,7 @@ public class ProductsPage extends BasePage {
         super(driver);
     }
 
-    public boolean isTittleIsDisplayed(){
+    public boolean isTittleIsDisplayed() {
         return driver.findElement(title).isDisplayed();
     }
 

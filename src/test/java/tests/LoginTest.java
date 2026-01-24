@@ -58,5 +58,3 @@ public class LoginTest extends BaseTest {
                 "Не верный текст сообщения об ошибке");
     }
 }
-
-
