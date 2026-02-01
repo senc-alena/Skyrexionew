@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 
-public class LoginTest extends BaseTest {
+public class TestLogin extends BaseTest {
 
     @Test(invocationCount = 1, priority = 2, enabled = true)
     public void correctLogin() {
@@ -18,8 +18,8 @@ public class LoginTest extends BaseTest {
     }
 
     @DataProvider(name = "incorrectLoginData")
-    public  Object[][] loginData() {
-        return new Object[][] {
+    public Object[][] loginData() {
+        return new Object[][]{
                 {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."},
                 {"", "secret_sauce", "Epic sadface: Username is required"},
                 {"standard_user", "", "Epic sadface: Password is required"},
@@ -38,5 +38,4 @@ public class LoginTest extends BaseTest {
         assertEquals(loginPage.getErrorText(), errorMsg,
                 "Не верный текст сообщения об ошибке");
     }
-
 }

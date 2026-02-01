@@ -2,19 +2,30 @@ package tests;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.testng.Assert.*;
 
 public class ProductsTest extends BaseTest {
+    List<String> goodsList = new ArrayList<>(
+            List.of("Test.allTheThings() T-Shirt (Red)",
+                    "Sauce Labs Fleece Jacket", "Sauce Labs Bike Light")
+    );
 
     @Test
     public void checkGoodsAdded() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPage.isTittleIsDisplayed();
-        productsPage.addGoodsToCard("Sauce Labs Bike Light");
-        productsPage.addGoodsToCard("Sauce Labs Fleece Jacket");
-        productsPage.addGoodsToCard("Test.allTheThings() T-Shirt (Red)");
-        assertEquals(productsPage.checkCounterValue(), "3");
+        assertTrue(productsPage.isTittleIsDisplayed());
+        assertEquals(productsPage.checkTittleName(), "Products");
+        for (int i = 0; i < goodsList.size(); i++) {
+            productsPage.addGoodsToCard(goodsList.get(i));
+        }
+
+        productsPage.addGoodsToCard(2);
+
+        assertEquals(productsPage.checkCounterValue(), "4");
         assertEquals(productsPage.checkCounterColor(), "rgba(226, 35, 26, 1)");
     }
 }

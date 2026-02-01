@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.CardPage;
 import pages.LoginPage;
 import pages.ProductsPage;
 
@@ -15,6 +16,7 @@ public class BaseTest {
     public WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
+    CardPage cardPage;
 
     @BeforeMethod
     public void setup() {
@@ -27,10 +29,11 @@ public class BaseTest {
 
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
+        cardPage = new CardPage(driver);
     }
 
     @AfterMethod
     public void closeBrowser() {
-        //driver.quit();
+        driver.quit();
     }
 }
