@@ -19,10 +19,6 @@ public class ProductsPage extends BasePage {
         return driver.findElement(title).isDisplayed();
     }
 
-    public String getTitle() {
-        return driver.findElement(title).getText();
-    }
-
     public void addGoodsToCard(String goodsName) {
         By addToCard = By.xpath(ADD_TO_PATTERN.formatted(goodsName));
         driver.findElement(addToCard).click();

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" name="Skyrexionew" parallel="classes">
+
+    <test name="Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.TestLogin"/>
+        </classes>
+    </test>    <!--  Test  -->
+
+    <test name="Edge">
+        <parameter name="browser" value="edge"/>
+        <classes>
+            <class name="tests.ProductsTest"/>
+            <class name="tests.CardTest"/>
+                    </classes>
+    </test>
+    <!--  Test  -->
+</suite>
