@@ -23,12 +23,13 @@ public class BaseTest {
     ProductsPage productsPage;
     CardPage cardPage;
     String user = PropertyReader.getProperty("skyrexionewdemmo.admin_user");
-    String password = PropertyReader.getProperty("skyrexionewdemmo.password");
+    String password = PropertyReader.getProperty("skyrexionewdemmo.password");;
 
     @Parameters({"browser"})
     @BeforeMethod
     public void setup(@Optional("chrome") String browser) {
-        if (browser.equalsIgnoreCase("chrome")) {
+        if (browser.equalsIgnoreCase("chrome"))
+        {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("start-maximized");
