@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Saus" parallel="classes" thread-count="2">
+
+    <test name="All tests">
+        <classes>
+            <class name="tests.TestLogin"/>
+            <class name="tests.ProductsTest"/>
+            <class name="tests.CardTest"/>
+        </classes>
+    </test>
+    <!--  Test  -->
+</suite>

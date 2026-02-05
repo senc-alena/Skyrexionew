@@ -7,8 +7,11 @@ public class ProductsPage extends BasePage {
     private static final String ADD_TO_PATTERN =
             "//*[text()='%s']//ancestor::div[@class='inventory_item']" +
                     "//child::button[text()='Add to cart']";
+    private static final String ITEM_BUTTON_PATTERN =
+            "//*[text()='%s']//ancestor::div[@class='inventory_item']" +
+                    "//child::button";
     private final By title = By.cssSelector("[data-test='title']");
-    private final By cardCounter = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-badge"));
+    private final By cardLink = By.cssSelector(DATA_TEST_PATTERN.formatted("shopping-cart-badge"));
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -18,20 +21,37 @@ public class ProductsPage extends BasePage {
         return driver.findElement(title).isDisplayed();
     }
 
-    public String getTitle() {
-        return driver.findElement(title).getText();
-    }
-
     public void addGoodsToCard(String goodsName) {
         By addToCard = By.xpath(ADD_TO_PATTERN.formatted(goodsName));
         driver.findElement(addToCard).click();
     }
 
+    public void addGoodsToCard(int goodIndex) {
+        driver.findElements(By.xpath("//*[text()='Add to cart']")).get(goodIndex).click();
+    }
+
     public String checkCounterValue() {
-        return driver.findElement(cardCounter).getText();
+        return driver.findElement(cardLink).getText();
     }
 
     public String checkCounterColor() {
-        return driver.findElement(cardCounter).getCssValue("background-color");
+        return driver.findElement(cardLink).getCssValue("background-color");
+    }
+
+    public void switchToCard() {
+        driver.findElement(cardLink).click();
+    }
+
+    public String getButtonTextForItem(String goodsName) {
+        By itemButton = By.xpath(ITEM_BUTTON_PATTERN.formatted(goodsName));
+        return driver.findElement(itemButton).getText();
+    }
+
+    public boolean isRemoveButtonDisplayedForItem(String goodsName) {
+        return getButtonTextForItem(goodsName).equals("Remove");
+    }
+
+    public boolean isAddToCartButtonDisplayedForItem(String goodsName) {
+        return getButtonTextForItem(goodsName).equals("Add to cart");
     }
 }
