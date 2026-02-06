@@ -1,18 +1,25 @@
 package tests;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 import static user.UserFactory.withAdminPermission;
 
-public class CardTest extends BaseTest {
+@Feature("Корзина")
+public class CartTest extends BaseTest {
     final String goodName = "Sauce Labs Bike Light";
 
-    @Test
+    @Story("Добавление товара в корзину и переход в неё")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(description = "Тест проверяет переход в корзину")
     public void checkGoodsAdded() {
-        System.out.println("CardTest.correct !!!! in thread: " + Thread.currentThread().getId());
+        System.out.println("CardTest.correct !!!! in thread: " + Thread.currentThread().threadId());
         loginPage.open();
-        loginPage.login(withAdminPermission());
+        loginPage.loginUser(withAdminPermission());
         assertEquals(productsPage.checkTittleName(), "Products");
 
         productsPage.addGoodsToCard(goodName);
