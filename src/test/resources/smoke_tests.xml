@@ -4,9 +4,9 @@
 
     <test name="All tests">
         <classes>
-            <class name="tests.TestLogin"/>
+            <class name="tests.LoginTest"/>
             <class name="tests.ProductsTest"/>
-            <class name="tests.CardTest"/>
+            <class name="tests.CartTest"/>
         </classes>
     </test>
     <!--  Test  -->

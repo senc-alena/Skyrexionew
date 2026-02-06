@@ -5,7 +5,7 @@
     <test name="Chrome">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="tests.TestLogin"/>
+            <class name="tests.LoginTest"/>
         </classes>
     </test>    <!--  Test  -->
 
@@ -13,7 +13,7 @@
         <parameter name="browser" value="edge"/>
         <classes>
             <class name="tests.ProductsTest"/>
-            <class name="tests.CardTest"/>
+            <class name="tests.CartTest"/>
                     </classes>
     </test>
     <!--  Test  -->
