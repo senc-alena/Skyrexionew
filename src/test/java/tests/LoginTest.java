@@ -1,18 +1,22 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 import static user.UserFactory.withAdminPermission;
 
-public class TestLogin extends BaseTest {
+@Feature("Авторизация пользователей")
+public class LoginTest extends BaseTest {
 
-    @Test(invocationCount = 1, priority = 2, enabled = true)
+    @Story("Успешная авторизация")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(description = "Тест проверяет вход авторизацию корректного пользователя", invocationCount = 1, priority = 2, enabled = true)
     public void correctLogin() {
-        System.out.println("TestLogin.correct !!!! in thread: " + Thread.currentThread().getId());
+        System.out.println("TestLogin.correct !!!! in thread: " + Thread.currentThread().threadId());
         loginPage.open();
-        loginPage.login(withAdminPermission());
+        loginPage.loginUser(withAdminPermission());
 
         assertTrue(productsPage.isTittleIsDisplayed(), "Заголовок не виден");
         assertEquals(productsPage.checkTittleName(), "Products", "Не верный заголовок");
@@ -29,10 +33,12 @@ public class TestLogin extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "incorrectLoginData", description = "тест проверяет авторизацию заблокированного пользователя",
+    @Story("Неуспешная авторизация")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(dataProvider = "incorrectLoginData", description = "Тест проверяет авторизацию заблокированного пользователя",
             invocationCount = 1, priority = 1)
     public void incorrectLogin(String user, String password, String errorMsg) {
-        System.out.println("TestLogin.incorrect !!!! in thread: " + Thread.currentThread().getId());
+        System.out.println("TestLogin.incorrect !!!! in thread: " + Thread.currentThread().threadId());
         loginPage.open();
         loginPage.login(user, password);
 

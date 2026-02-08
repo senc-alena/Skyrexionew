@@ -1,6 +1,9 @@
 package tests;
 
-import org.openqa.selenium.By;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -8,23 +11,24 @@ import java.util.List;
 import static org.testng.Assert.*;
 import static user.UserFactory.withAdminPermission;
 
+@Feature("Продуктовая страница")
 public class ProductsTest extends BaseTest {
     List<String> goodsList =
             List.of("Test.allTheThings() T-Shirt (Red)",
                     "Sauce Labs Fleece Jacket", "Sauce Labs Bike Light");
 
-    List<String> itemsToTest = List.of("Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt");
-
-    @Test
+    @Story("Добавление нескольких товаров в корзину")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(description = "Тест проверяет верное количество добавленных товаров и цвет иконки корзины")
     public void checkGoodsAdded() {
-        System.out.println("ProductsTest.correct !!!! in thread: " + Thread.currentThread().getId());
+        System.out.println("ProductsTest.correct !!!! in thread: " + Thread.currentThread().threadId());
         loginPage.open();
-        loginPage.login(withAdminPermission());
+        loginPage.loginUser(withAdminPermission());
         assertTrue(productsPage.isTittleIsDisplayed());
         assertEquals(productsPage.checkTittleName(), "Products");
 
-        for (int i = 0; i < goodsList.size(); i++) {
-            productsPage.addGoodsToCard(goodsList.get(i));
+        for (String s : goodsList) {
+            productsPage.addGoodsToCard(s);
         }
 
         productsPage.addGoodsToCard(2);
@@ -32,39 +36,43 @@ public class ProductsTest extends BaseTest {
         assertEquals(productsPage.checkCounterColor(), "rgba(226, 35, 26, 1)");
     }
 
-    @Test
+    @Story("Изменение состояния кнопок Add to cart/Remove")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(description = "Тест проверяет добавление товаров в корзину и значение кнопок")
     public void checkMultipleItemsButtonState() {
-        System.out.println("checkMultipleItemsButtonState !!!! in thread: " + Thread.currentThread().getId());
+        System.out.println("checkMultipleItemsButtonState !!!! in thread: " + Thread.currentThread().threadId());
 
         loginPage.open();
-        loginPage.login(withAdminPermission());
+        loginPage.loginUser(withAdminPermission());
 
-        for (String item : itemsToTest) {
+        for (String item : goodsList) {
             assertTrue(productsPage.isAddToCartButtonDisplayedForItem(item),
                     "Товар " + item + " должен иметь кнопку 'Add to cart'");
         }
 
         for (int i = 0; i < 2; i++) {
-            productsPage.addGoodsToCard(itemsToTest.get(i));
+            productsPage.addGoodsToCard(goodsList.get(i));
         }
 
-        assertTrue(productsPage.isRemoveButtonDisplayedForItem(itemsToTest.get(0)),
+        assertTrue(productsPage.isRemoveButtonDisplayedForItem(goodsList.get(0)),
                 "Первый товар должен иметь кнопку 'Remove'");
-        assertTrue(productsPage.isRemoveButtonDisplayedForItem(itemsToTest.get(1)),
+        assertTrue(productsPage.isRemoveButtonDisplayedForItem(goodsList.get(1)),
                 "Второй товар должен иметь кнопку 'Remove'");
-        assertTrue(productsPage.isAddToCartButtonDisplayedForItem(itemsToTest.get(2)),
+        assertTrue(productsPage.isAddToCartButtonDisplayedForItem(goodsList.get(2)),
                 "Третий товар всё ещё должен иметь кнопку 'Add to cart'");
 
         assertEquals(productsPage.checkCounterValue(), "2",
                 "Счётчик должен показывать 2 после добавления двух товаров");
     }
 
-    @Test
+    @Story("Переключение кнопки Add to cart → Remove")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(description = "Тест проверяет переключение значение кнопки с Add to cart на Remove")
     public void checkButtonChangesFromAddToCartToRemove() {
-        System.out.println("checkButtonChangesFromAddToCartToRemove !!!! in thread: " + Thread.currentThread().getId());
+        System.out.println("checkButtonChangesFromAddToCartToRemove !!!! in thread: " + Thread.currentThread().threadId());
 
         loginPage.open();
-        loginPage.login(withAdminPermission());
+        loginPage.loginUser(withAdminPermission());
         assertTrue(productsPage.isTittleIsDisplayed());
         assertEquals(productsPage.checkTittleName(), "Products");
 
@@ -79,11 +87,13 @@ public class ProductsTest extends BaseTest {
                 "Счётчик корзины должен показывать 1 после добавления товара");
     }
 
-    @Test
+    @Story("Блокировка повторного добавления товара в корзину")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(description = "Тест проверяет невозможность повторного добавления товара в корзину")
     public void checkItemAlreadyInCartErrorMessage() {
-        System.out.println("checkItemAlreadyInCartErrorMessage !!!! in thread: " + Thread.currentThread().getId());
+        System.out.println("checkItemAlreadyInCartErrorMessage !!!! in thread: " + Thread.currentThread().threadId());
         loginPage.open();
-        loginPage.login(withAdminPermission());
+        loginPage.loginUser(withAdminPermission());
 
         String testItem = "Sauce Labs Backpack";
         assertTrue(productsPage.isAddToCartButtonDisplayedForItem(testItem),
