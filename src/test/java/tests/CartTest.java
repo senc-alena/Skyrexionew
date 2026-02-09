@@ -6,6 +6,8 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
+import static enums.TitleNaming.CART;
+import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.*;
 import static user.UserFactory.withAdminPermission;
 
@@ -20,12 +22,12 @@ public class CartTest extends BaseTest {
         System.out.println("CardTest.correct !!!! in thread: " + Thread.currentThread().threadId());
         loginPage.open();
         loginPage.loginUser(withAdminPermission());
-        assertEquals(productsPage.checkTittleName(), "Products");
+        assertEquals(productsPage.checkTittleName(), PRODUCTS.getDisplayName());
 
         productsPage.addGoodsToCard(goodName);
         productsPage.switchToCard();
 
-        assertEquals(cardPage.checkTittleName(), "Your Cart");
+        assertEquals(cardPage.checkTittleName(), CART.getDisplayName());
         assertFalse(cardPage.getProductsNames().isEmpty());
         assertEquals(cardPage.getProductsNames().size(), 1);
         assertTrue(cardPage.getProductsNames().contains(goodName));
