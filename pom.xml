@@ -17,6 +17,7 @@
         <webdrivermanager.version>6.3.3</webdrivermanager.version>
         <aspectj.version>1.9.24</aspectj.version>
         <allure.version>2.32.0</allure.version>
+        <lombok.version>1.18.42</lombok.version>
     </properties>
 
     <dependencies>
@@ -50,6 +51,12 @@
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
         </dependency>
+
+         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+         </dependency>
 
     </dependencies>
 
