@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.*;
 import static user.UserFactory.withAdminPermission;
 
@@ -74,7 +75,7 @@ public class ProductsTest extends BaseTest {
         loginPage.open();
         loginPage.loginUser(withAdminPermission());
         assertTrue(productsPage.isTittleIsDisplayed());
-        assertEquals(productsPage.checkTittleName(), "Products");
+        assertEquals(productsPage.checkTittleName(), PRODUCTS.getDisplayName());
 
         String testItem = "Sauce Labs Backpack";
         assertTrue(productsPage.isAddToCartButtonDisplayedForItem(testItem),

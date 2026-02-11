@@ -4,6 +4,7 @@ import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.*;
 import static user.UserFactory.withAdminPermission;
 
@@ -19,7 +20,7 @@ public class LoginTest extends BaseTest {
         loginPage.loginUser(withAdminPermission());
 
         assertTrue(productsPage.isTittleIsDisplayed(), "Заголовок не виден");
-        assertEquals(productsPage.checkTittleName(), "Products", "Не верный заголовок");
+        assertEquals(productsPage.checkTittleName(), PRODUCTS.getDisplayName(), "Не верный заголовок");
     }
 
     @DataProvider(name = "incorrectLoginData")
